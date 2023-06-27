@@ -4,7 +4,10 @@ import App from "./App.jsx";
 
 import { BrowserRouter } from "react-router-dom";
 
-import "./index.css";
+import "./assets/index.css";
+import "./assets/theme.css";
+
+import "primeicons/primeicons.css";
 
 if (!import.meta.env.VITE_REACT_APP_ENV) {
   console.error("Please define your environment");
