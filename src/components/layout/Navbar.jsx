@@ -1,4 +1,5 @@
 import { Button } from "primereact/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -11,8 +12,25 @@ const Navbar = () => {
         padding: "0.5rem 1rem",
       }}
     >
-      <h1>Dairy Farm Report</h1>
-      <a href="">
+      <Link
+        to="/"
+        style={{
+          color: "black",
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+          gap: "0.5rem",
+        }}
+      >
+        <span>
+          <i
+            className="pi pi-directions-alt"
+            style={{ fontSize: "1.5rem", color: "var(--cyan-600)" }}
+          ></i>
+        </span>
+        <h3>Dairy Farm Report</h3>
+      </Link>
+      <a href="https://github.com/LoisaKitakaya/dairy-farm">
         <Button
           style={{ cursor: "pointer" }}
           label="View on GitHub"

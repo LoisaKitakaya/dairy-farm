@@ -15,7 +15,7 @@ const ChartOne = ({ sofia, helene }) => {
     const surfaceBorder = documentStyle.getPropertyValue("--surface-border");
 
     const data = {
-      labels: sofia.map(() => "Sofia/Helene"),
+      labels: sofia.map((item) => item.date_ref),
       datasets: [
         {
           label: "Sofia's Daily Total production",

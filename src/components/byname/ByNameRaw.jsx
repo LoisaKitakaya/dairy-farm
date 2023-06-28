@@ -1,16 +1,17 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Table from "../table/Table";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import HomeVisualized from "./HomeVisualized";
+import ByNameVisualized from "./ByNameVisualized";
 
-const HomeRaw = () => {
-  if (!import.meta.env.VITE_REACT_APP_ALL_RECORDS) {
+const ByNameRaw = ({ param }) => {
+  if (!import.meta.env.VITE_REACT_APP_RECORDS_BY_NAME) {
     console.warn("endpoint not defined");
   }
 
-  const url = import.meta.env.VITE_REACT_APP_ALL_RECORDS;
+  const url = import.meta.env.VITE_REACT_APP_RECORDS_BY_NAME;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ const HomeRaw = () => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`${url}`);
+      const response = await axios.get(`${url}${param}/`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -136,7 +137,7 @@ const HomeRaw = () => {
                     </span>
                   </h4>
                   <br />
-                  <HomeVisualized records={tableData} />
+                  <ByNameVisualized records={tableData} />
                 </>
               ) : (
                 <>
@@ -151,4 +152,4 @@ const HomeRaw = () => {
   );
 };
 
-export default HomeRaw;
+export default ByNameRaw;
