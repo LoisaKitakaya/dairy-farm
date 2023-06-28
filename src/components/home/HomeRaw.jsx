@@ -94,46 +94,54 @@ const HomeRaw = () => {
         <>
           {data && (
             <>
-              <h4 style={{ textAlign: "center" }}>
-                <span
-                  style={{
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  🐄
-                </span>{" "}
-                {data.data.message}{" "}
-                <span
-                  style={{
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  🐄
-                </span>
-              </h4>
-              <br />
-              <Table data={tableData} />
-              <br />
-              <br />
-              <h4 style={{ textAlign: "center" }}>
-                <span
-                  style={{
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  📊
-                </span>{" "}
-                Summary of daily total milk production{" "}
-                <span
-                  style={{
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  📊
-                </span>
-              </h4>
-              <br />
-              <HomeVisualized records={tableData} />
+              {data.data.records.length > 0 ? (
+                <>
+                  <h4 style={{ textAlign: "center" }}>
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      🐄
+                    </span>{" "}
+                    {data.data.message}{" "}
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      🐄
+                    </span>
+                  </h4>
+                  <br />
+                  <Table data={tableData} />
+                  <br />
+                  <br />
+                  <h4 style={{ textAlign: "center" }}>
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      📊
+                    </span>{" "}
+                    Summary of daily total milk production{" "}
+                    <span
+                      style={{
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      📊
+                    </span>
+                  </h4>
+                  <br />
+                  <HomeVisualized records={tableData} />
+                </>
+              ) : (
+                <>
+                  <h4 style={{ textAlign: "center" }}>{data.data.message}</h4>
+                </>
+              )}
             </>
           )}
         </>
