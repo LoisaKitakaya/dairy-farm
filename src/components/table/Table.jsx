@@ -6,11 +6,11 @@ const Table = ({ data }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const columns = useMemo(
     () => [
-      {
-        accessorKey: "id",
-        header: "#ID",
-        size: 150,
-      },
+      // {
+      //   accessorKey: "id",
+      //   header: "#ID",
+      //   size: 150,
+      // },
       {
         accessorKey: "name",
         header: "Name",
@@ -29,6 +29,11 @@ const Table = ({ data }) => {
       {
         accessorKey: "evening",
         header: "Evening",
+        size: 150,
+      },
+      {
+        accessorKey: "total",
+        header: "Total",
         size: 150,
       },
       {

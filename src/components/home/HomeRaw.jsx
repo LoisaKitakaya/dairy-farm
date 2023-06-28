@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ProgressSpinner } from "primereact/progressspinner";
 import Table from "../table/Table";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import HomeVisualized from "./HomeVisualized";
 
 const HomeRaw = () => {
   if (!import.meta.env.VITE_REACT_APP_ALL_RECORDS) {
@@ -31,12 +31,19 @@ const HomeRaw = () => {
   const tableData =
     data &&
     data.data.records.map((col) => {
+      const total =
+        col.morning_production +
+        col.afternoon_production +
+        col.evening_production;
+
       return {
         id: col.id,
+        ref: col.name,
         name: <Link to={`/name/${col.name}`}>{col.name}</Link>,
-        morning: col.morning_production,
-        noon: col.afternoon_production,
-        evening: col.evening_production,
+        morning: col.morning_production.toLocaleString(),
+        noon: col.afternoon_production.toLocaleString(),
+        evening: col.evening_production.toLocaleString(),
+        total: total.toLocaleString(),
         unit: col.production_unit,
         date: (
           <Link
@@ -55,7 +62,7 @@ const HomeRaw = () => {
 
   return (
     <>
-      {loading ? (
+      {loading === true ? (
         <div
           style={{
             display: "flex",
@@ -63,15 +70,70 @@ const HomeRaw = () => {
             alignItems: "center",
           }}
         >
-          <ProgressSpinner />
+          <div
+            style={{
+              margin: "12rem 0",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <i
+              className="pi pi-spin pi-cog"
+              style={{
+                fontSize: "3rem",
+              }}
+              aria-label="Loading"
+            ></i>
+            <span style={{ marginTop: "0.5rem", fontWeight: "bold" }}>
+              loading
+            </span>
+          </div>
         </div>
       ) : (
         <>
           {data && (
             <>
-              <h4 style={{ textAlign: "center" }}>{data.data.message}</h4>
+              <h4 style={{ textAlign: "center" }}>
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  🐄
+                </span>{" "}
+                {data.data.message}{" "}
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  🐄
+                </span>
+              </h4>
               <br />
               <Table data={tableData} />
+              <br />
+              <br />
+              <h4 style={{ textAlign: "center" }}>
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  📊
+                </span>{" "}
+                Summary of daily total milk production{" "}
+                <span
+                  style={{
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  📊
+                </span>
+              </h4>
+              <br />
+              <HomeVisualized records={tableData} />
             </>
           )}
         </>
